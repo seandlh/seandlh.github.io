@@ -1,2 +1,2 @@
-# texancanadian.github.io
+# texancanadian
 Our static texancanadian.com landing page
