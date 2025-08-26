@@ -9,7 +9,8 @@
   <meta property="og:description" content="A nature-inspired homeschool. Learn, explore, and grow together." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#2f6d4e" />
-  <link rel="icon" href="#owl-favicon" />
+  <!-- Use a data-URL favicon so it works under subpaths like /hillside -->
+  <link rel="icon" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2f6d4e"/><stop offset="100%" stop-color="#5fbf86"/></linearGradient></defs><circle cx="100" cy="100" r="96" fill="url(%23g1)"/><path d="M50 120c0-36 26-60 50-60s50 24 50 60c0 24-20 44-50 44s-50-20-50-44z" fill="#f1efe6"/><circle cx="80" cy="110" r="16" fill="#fff"/><circle cx="120" cy="110" r="16" fill="#fff"/><circle cx="80" cy="110" r="8" fill="#33433f"/><circle cx="120" cy="110" r="8" fill="#33433f"/><path d="M90 130c6 4 14 4 20 0" stroke="#33433f" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M74 88c5-10 14-16 26-16s21 6 26 16" stroke="#9d6b53" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M60 150c14 10 66 10 80 0" stroke="#2f6d4e" stroke-width="10" fill="none" stroke-linecap="round"/><path d="M100 72c12 0 18-12 18-18 0-2-1-6-1-6s-9 3-17 3-17-3-17-3-1 4-1 6c0 6 6 18 18 18z" fill="#f1efe6"/></svg>' />
   <style>
     :root{
       --forest: #2f6d4e;
@@ -26,7 +27,6 @@
       margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
       color:var(--stone); background: var(--sky);
       line-height:1.6;
-      /* soft leaf pattern */
       background-image:
         radial-gradient(circle at 20% 20%, rgba(95,191,134,.08) 0 120px, transparent 121px),
         radial-gradient(circle at 80% 10%, rgba(47,109,78,.06) 0 140px, transparent 141px),
@@ -49,10 +49,7 @@
     .menu a{padding:.4rem .6rem; border-radius:.6rem}
     .menu a:hover{background:rgba(95,191,134,.12)}
 
-    .hero{
-      display:grid; grid-template-columns: 1.2fr 1fr; gap:2rem; align-items:center;
-      padding: clamp(2rem, 6vw, 5rem) 0;
-    }
+    .hero{display:grid; grid-template-columns: 1.2fr 1fr; gap:2rem; align-items:center; padding: clamp(2rem, 6vw, 5rem) 0}
     .hero h1{font-size:clamp(2rem, 6vw, 3.2rem); line-height:1.1; margin:.25rem 0 .75rem; color:var(--forest)}
     .tagline{font-size:1.1rem; color:#36554b}
     .cta{margin-top:1.2rem; display:flex; gap:.75rem; flex-wrap:wrap}
@@ -60,26 +57,16 @@
     .btn.primary{background:var(--forest); color:white}
     .btn.secondary{background:transparent; color:var(--forest)}
 
-    .owl-mark{
-      width:min(420px, 100%);
-      justify-self:center;
-      filter: drop-shadow(0 20px 40px rgba(47,109,78,.18));
-    }
+    .owl-mark{width:min(420px, 100%); justify-self:center; filter: drop-shadow(0 20px 40px rgba(47,109,78,.18))}
 
     section{padding: 3rem 0}
     h2{font-size:1.8rem; margin:0 0 .75rem; color:var(--forest)}
     .card-grid{display:grid; gap:1rem; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); margin-top:1rem}
-    .card{
-      background: white; border:1px solid rgba(0,0,0,.05); border-radius:1rem; padding:1rem;
-      box-shadow: 0 6px 20px rgba(0,0,0,.04);
-    }
+    .card{background: white; border:1px solid rgba(0,0,0,.05); border-radius:1rem; padding:1rem; box-shadow: 0 6px 20px rgba(0,0,0,.04)}
     .card h3{margin-top:.25rem; margin-bottom:.25rem; color:#2d4a41}
     .chip{display:inline-block; padding:.2rem .5rem; border-radius:999px; background:var(--sky); border:1px solid rgba(47,109,78,.2); font-size:.8rem}
 
-    .banner{
-      background: linear-gradient(135deg, var(--forest), var(--moss));
-      color:white; border-radius:1.2rem; padding:1.25rem 1rem; display:flex; align-items:center; justify-content:space-between; gap:1rem;
-    }
+    .banner{background: linear-gradient(135deg, var(--forest), var(--moss)); color:white; border-radius:1.2rem; padding:1.25rem 1rem; display:flex; align-items:center; justify-content:space-between; gap:1rem}
     .banner strong{font-weight:700}
 
     .two-col{display:grid; grid-template-columns: 1fr 1fr; gap:1.25rem}
@@ -104,27 +91,33 @@
   </style>
 </head>
 <body>
+  <!-- ONE owl graphic used everywhere via <symbol> to ensure exact consistency -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+    <defs>
+      <linearGradient id="logo-g1" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#2f6d4e"/>
+        <stop offset="100%" stop-color="#5fbf86"/>
+      </linearGradient>
+      <symbol id="logo-owl" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="96" fill="url(#logo-g1)"/>
+        <path d="M50 120c0-36 26-60 50-60s50 24 50 60c0 24-20 44-50 44s-50-20-50-44z" fill="#f1efe6"/>
+        <circle cx="80" cy="110" r="16" fill="#fff"/>
+        <circle cx="120" cy="110" r="16" fill="#fff"/>
+        <circle cx="80" cy="110" r="8" fill="#33433f"/>
+        <circle cx="120" cy="110" r="8" fill="#33433f"/>
+        <path d="M90 130c6 4 14 4 20 0" stroke="#33433f" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M74 88c5-10 14-16 26-16s21 6 26 16" stroke="#9d6b53" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M60 150c14 10 66 10 80 0" stroke="#2f6d4e" stroke-width="10" fill="none" stroke-linecap="round"/>
+        <path d="M100 72c12 0 18-12 18-18 0-2-1-6-1-6s-9 3-17 3-17-3-17-3-1 4-1 6c0 6 6 18 18 18z" fill="#f1efe6"/>
+      </symbol>
+    </defs>
+  </svg>
+
   <header>
     <div class="container nav">
       <a class="brand" href="#home" aria-label="Hillside Academy home">
-        <!-- Inline SVG Owl Logo (also used for favicon via fragment id) -->
-        <svg id="owl-favicon" viewBox="0 0 200 200" aria-hidden="true" focusable="false" role="img">
-          <defs>
-            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#2f6d4e"/>
-              <stop offset="100%" stop-color="#5fbf86"/>
-            </linearGradient>
-          </defs>
-          <circle cx="100" cy="100" r="96" fill="url(#g1)"/>
-          <path d="M50 120c0-36 26-60 50-60s50 24 50 60c0 24-20 44-50 44s-50-20-50-44z" fill="#f1efe6"/>
-          <circle cx="80" cy="110" r="16" fill="#fff"/>
-          <circle cx="120" cy="110" r="16" fill="#fff"/>
-          <circle cx="80" cy="110" r="8" fill="#33433f"/>
-          <circle cx="120" cy="110" r="8" fill="#33433f"/>
-          <path d="M90 130c6 4 14 4 20 0" stroke="#33433f" stroke-width="4" fill="none" stroke-linecap="round"/>
-          <path d="M74 88c5-10 14-16 26-16s21 6 26 16" stroke="#9d6b53" stroke-width="6" fill="none" stroke-linecap="round"/>
-          <path d="M60 150c14 10 66 10 80 0" stroke="#2f6d4e" stroke-width="10" fill="none" stroke-linecap="round"/>
-          <path d="M100 72c12 0 18-12 18-18 0-2-1-6-1-6s-9 3-17 3-17-3-17-3-1 4-1 6c0 6 6 18 18 18z" fill="#f1efe6"/>
+        <svg viewBox="0 0 200 200" aria-hidden="true" focusable="false" role="img">
+          <use href="#logo-owl" />
         </svg>
         <span>Hillside Academy</span>
       </a>
@@ -149,36 +142,17 @@
         </div>
       </div>
       <div>
-        <!-- Decorative logo illustration -->
-        <svg class="owl-mark" viewBox="0 0 600 500" role="img" aria-label="Hillside Academy owl in the forest">
+        <!-- Use the exact same owl symbol, enlarged, within a soft frame -->
+        <svg class="owl-mark" viewBox="0 0 600 500" role="img" aria-label="Hillside Academy owl">
           <defs>
-            <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+            <linearGradient id="frame-bg" x1="0" y1="0" x2="1" y2="1">
               <stop offset="0%" stop-color="#e8f5f1"/>
               <stop offset="100%" stop-color="#d8efe6"/>
             </linearGradient>
           </defs>
-          <rect width="100%" height="100%" rx="28" fill="url(#bg)"/>
-          <g opacity="0.25" fill="#5fbf86">
-            <path d="M30 430c40-90 120-90 160 0 40-110 120-110 160 0 40-90 120-90 160 0v20H30z"/>
-          </g>
-          <g transform="translate(120,70)">
-            <circle cx="180" cy="180" r="160" fill="#2f6d4e"/>
-            <g transform="translate(60,80)">
-              <path d="M0 120c0-90 65-150 120-150s120 60 120 150c0 60-48 110-120 110S0 180 0 120z" fill="#f1efe6"/>
-              <circle cx="80" cy="120" r="32" fill="#fff"/>
-              <circle cx="160" cy="120" r="32" fill="#fff"/>
-              <circle cx="80" cy="120" r="16" fill="#33433f"/>
-              <circle cx="160" cy="120" r="16" fill="#33433f"/>
-              <path d="M104 154c16 10 32 10 48 0" stroke="#33433f" stroke-width="8" fill="none" stroke-linecap="round"/>
-              <path d="M64 60c12-24 34-36 56-36s44 12 56 36" stroke="#9d6b53" stroke-width="10" fill="none" stroke-linecap="round"/>
-              <path d="M120 24c22 0 34-22 34-34 0-4-2-10-2-10s-16 6-32 6-32-6-32-6-2 6-2 10c0 12 12 34 34 34z" fill="#f1efe6"/>
-            </g>
-            <g fill="#3f8f62" opacity="0.5">
-              <rect x="-40" y="260" width="24" height="120" rx="8"/>
-              <rect x="380" y="250" width="28" height="130" rx="8"/>
-              <rect x="-10" y="280" width="18" height="100" rx="8"/>
-              <rect x="410" y="280" width="18" height="100" rx="8"/>
-            </g>
+          <rect width="100%" height="100%" rx="28" fill="url(#frame-bg)"/>
+          <g transform="translate(200,50) scale(2)">
+            <use href="#logo-owl" />
           </g>
         </svg>
       </div>
@@ -253,13 +227,6 @@
             </tbody>
           </table>
         </div>
-        <div>
-          <div class="card">
-            <h3>Downloadable Year Overview</h3>
-            <p>Want a printable one‑pager? Duplicate this site and add a PDF to the repository, then link it here.</p>
-            <p class="small">Tip: you can also embed a public Google Calendar by replacing this card with their embed code.</p>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -289,7 +256,7 @@
         <div class="card">
           <h3>Other Ways to Reach Us</h3>
           <p>
-            Email: <a href="mailto:hillside@texancanadian.com">hillside@texancanadian.com</a>
+            Email: <a href="hillside@texancanadian.com">hillside@texancanadian.com</a><br>
           </p>
         </div>
       </div>
